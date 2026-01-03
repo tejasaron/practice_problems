@@ -1,4 +1,4 @@
-def countDigits(n):
+def countOddDigits(n):
     count = 0
     while n != 0:
         if (n % 10) % 2 != 0:
@@ -6,4 +6,4 @@ def countDigits(n):
         n //= 10
     return count
 
-print(countDigits(123456789))
+print(countOddDigits(123456789))
