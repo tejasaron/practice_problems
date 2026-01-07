@@ -19,8 +19,8 @@ X_train = np.vstack([cluster_0, cluster_1])
 y_train = np.concatenate([labels_0, labels_1])
 
 # Query point and k (same as before)
-x_query = [7, 3]
-k = 5
+x_query = [7, 3]    # The point you want to predict.
+k = 5               # Specifying the neighbours. 
 
 
 def knn_predict(X_train, y_train, x_query, k):
@@ -81,6 +81,18 @@ def plot_knn(X_train, y_train, x_query, k):
     distances = np.sqrt(np.sum((X_train - x_query) ** 2, axis=1))
     nearest_indices = np.argsort(distances)[:k]
 
+    # -------- Prediction --------
+    pred = knn_predict(X_train, y_train, x_query, k)
+
+    plt.text(
+        x_query[0] + 0.3,
+        x_query[1] - 0.3,
+        f"Predicted: Class {pred}",
+        fontsize=8,
+        fontweight="bold",
+        bbox=dict(facecolor="white", alpha=0.8, edgecolor="black")
+        )
+
     plt.scatter(
         X_train[nearest_indices][:, 0],
         X_train[nearest_indices][:, 1],
@@ -98,6 +110,8 @@ def plot_knn(X_train, y_train, x_query, k):
     plt.show()
 
 
+prediction = knn_predict(X_train, y_train, x_query, k)
+print(f"Predicted class for query point {x_query} with k={k}: {prediction}")
 
 plot_knn(X_train, y_train, x_query, k)
 
